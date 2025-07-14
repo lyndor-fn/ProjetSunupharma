@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "rapports.h"
 
-int main()
-{
-    printf("Hello world!\n");
+int main() {
+    genererRapportJournalier();
     return 0;
 }

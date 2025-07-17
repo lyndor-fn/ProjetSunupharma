@@ -10,6 +10,6 @@
 int main() {
 
 //ajouterUtilisateur();
-afficherUtilisateurs();
-//loginUtilisateur();
+//afficherUtilisateurs();
+loginUtilisateur();
 }

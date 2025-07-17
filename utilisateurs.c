@@ -134,7 +134,7 @@ void ajouterUtilisateur() {
     if (f) {
         fwrite(&u, sizeof(Utilisateur), 1, f);
         fclose(f);
-        printf("\033[32m[OK] Utilisateur ajouté avec succès.\033[0m\n");
+        printf("\033[32m[OK] Utilisateur ajoute avec succes.\033[0m\n");
     } else {
         printf("\033[31m[ERREUR] Impossible d'écrire dans le fichier.\033[0m\n");
     }

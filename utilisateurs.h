@@ -3,12 +3,12 @@
 
 typedef struct {
     char login[6];          // 5 lettres majuscules
-    char motDePasse[20];    // par d�faut : pharma123
+    char motDePasse[20];    // par defaut : pharma123
     char nom[20];
     char prenom[30];
     char telephone[30];
     char role[15];          // ADMIN ou PHARMA
-    int estActif;           // 1 = actif, 0 = bloqu�
+    int estActif;           // 1 = actif, 0 = bloque
     int premiereConnexion;  // 1 = oui, 0 = non
 } Utilisateur;
 

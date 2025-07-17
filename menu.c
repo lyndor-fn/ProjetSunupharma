@@ -32,8 +32,8 @@ void menuAdmin() {
         scanf("%d", &choix);
 
         switch(choix) {
-          // case 1: clearScreen(); menuGestionCategories(); break;
-            //case 2: clearScreen(); menuGestionProduits(); break;
+            case 1: clearScreen(); menuGestionCategories(); break;
+            case 2: clearScreen(); menuGestionProduits(); break;
             case 3: clearScreen(); ajouterUtilisateur(); break;
             case 4: clearScreen(); afficherUtilisateurs(); break;
             case 5: clearScreen(); changerStatutUtilisateur(); break;
@@ -56,9 +56,9 @@ void menuPharmacien() {
         scanf("%d", &choix);
 
         switch(choix) {
-          //  case 1:  menuGestionVentes();  break;
-          //  case 2:  consulterStock(); break;
-            //case 3:  genererRapportJournalier();  break;
+            case 1:  menuGestionVentes();  break;
+            case 2:  consulterStock(); break;
+            case 3:  genererRapportJournalier();  break;
             case 0:  clearScreen(); printf("Deconnexion...\n"); break;
             default: printf("Choix invalide !\n");
         }

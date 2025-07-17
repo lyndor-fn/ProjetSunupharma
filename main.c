@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 //#include "produits.h"
@@ -12,4 +13,11 @@ int main() {
 //ajouterUtilisateur();
 //afficherUtilisateurs();
 loginUtilisateur();
+=======
+#include "rapports.h"
+
+int main() {
+    genererRapportJournalier();
+    return 0;
+>>>>>>> lindor
 }

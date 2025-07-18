@@ -7,70 +7,74 @@
 #include "produit.h"
 #include "utilisateurs.h"
 
-void menuGestionVentes() {
-    char login[6];
-    printf("===== MODULE DE GESTION DES VENTES =====\n");
+
+Produit p;
+void menuGestionVentes(){
+ char login[6];
+
+    printf("===== MODULE DE TEST : GESTION DES VENTES =====\n");
     printf("Entrez le login du pharmacien (5 lettres majuscules) : ");
     scanf("%s", login);
 
     effectuerVente(login);
 }
-
+// Génération du numéro de vente : AAAAMMDDHHmmSS
 void genererNumeroVente(char* numero) {
     time_t t = time(NULL);
     struct tm* tm_info = localtime(&t);
     strftime(numero, 15, "%Y%m%d%H%M%S", tm_info);
 }
 
+// Affichage stylisé pour la console
 void afficherMessage(const char* message, const char* couleur) {
-    printf("%s%s\n", couleur, message); // Couleur ignorée si non ANSI
+    printf("%s%s\033[0m\n", couleur, message);
 }
 
+// Création de la facture
 void creerFacture(ProduitVendu ventes[], int taille, float total, char* login) {
     char numero[15];
+    system("mkdir BILLS");
     genererNumeroVente(numero);
 
-    char date[9];
-    strncpy(date, numero, 8); // extrait AAAAMMDD
-
-    system("mkdir BILLS");
-
     char nomFichier[100];
-    sprintf(nomFichier, "BILLS/RECU_%s_001_%s.txt", date, login);
+    sprintf(nomFichier, "BILLS/RECU_%s_001_%s.txt", numero, login);
 
     FILE* f = fopen(nomFichier, "w");
     if (!f) {
-        printf("[ERREUR] Impossible de creer la facture.\n");
+        afficherMessage("[ERREUR] Impossible de créer la facture.", "\033[0;31m");
         return;
     }
 
-    fprintf(f, "FACTURE DE VENTE\n");
-    fprintf(f, "Numero de vente : %s\n", numero);
-    fprintf(f, "Pharmacien : %s\n", login);
-    fprintf(f, "----------------------------------------\n");
-    fprintf(f, "Code Nom Qte PU Total\n");
-
+    fprintf(f, "========================================\n");
+    fprintf(f, "              FACTURE DE VENTE          \n");
+    fprintf(f, "========================================\n");
+    fprintf(f, "Numéro de vente : %s\nPharmacien : %s\n\n", numero, login);
+    fprintf(f, "%-6s %-25s %-5s %-10s %-10s\n", "Code", "Produit", "Qté", "PU (XOF)", "Total");
+    fprintf(f, "---------------------------------------------------------------\n");
     for (int i = 0; i < taille; i++) {
-        fprintf(f, "%s %s %d %.2f %.2f\n",
-                ventes[i].code, ventes[i].nom,
-                ventes[i].quantiteVendue,
-                ventes[i].prixUnitaire,
-                ventes[i].prixTotal);
+        fprintf(f, "%-6s %-25s %-5d %-10.2f %-10.2f\n",
+        ventes[i].code, ventes[i].nom,
+        ventes[i].quantiteVendue, ventes[i].prixUnitaire, ventes[i].prixTotal);
+
     }
 
-    fprintf(f, "\nTOTAL : %.2f XOF\n", total);
-    fprintf(f, "----------------------------------------\n");
-    fprintf(f, "Merci d'avoir choisi SUNUPHARMA.\n");
-
+    fprintf(f, "\nTOTAL À PAYER : %.2f XOF\n", total);
+       fprintf(f, "\n----------------------------------------\n");
+fprintf(f, "  Merci pour votre confiance chez Sunupharma \n");
+fprintf(f, "  À bientôt pour vos prochains besoins de santé !\n");
+fprintf(f, "----------------------------------------\n");
     fclose(f);
 
-    printf("Facture enregistree : %s\n", nomFichier);
+    char msg[150];
+    sprintf(msg, " Facture enregistrée : %s", nomFichier);
+    afficherMessage(msg, "\033[0;32m");
 }
 
+// Mise à jour automatique du stock
 void mettreAJourStock(ProduitVendu ventes[], int nb) {
     FILE* f = fopen("PRODUCTS.dat", "rb+");
     if (!f) {
-        printf("[ERREUR] Fichier PRODUCTS.dat introuvable.\n");
+        afficherMessage("[ERREUR] Fichier PRODUCTS.dat introuvable.", "\033[0;31m");
         return;
     }
 
@@ -92,11 +96,12 @@ void mettreAJourStock(ProduitVendu ventes[], int nb) {
 time_t convertirDate(const char* dateStr) {
     struct tm tm_date = {0};
     sscanf(dateStr, "%4d-%2d-%2d", &tm_date.tm_year, &tm_date.tm_mon, &tm_date.tm_mday);
-    tm_date.tm_year -= 1900;
-    tm_date.tm_mon -= 1;
+    tm_date.tm_year -= 1900;  // Année depuis 1900
+    tm_date.tm_mon -= 1;      // Mois de 0 à 11
     return mktime(&tm_date);
 }
 
+// Fonction principale de vente
 void effectuerVente(char* login) {
     ProduitVendu ventes[50];
     int nb = 0;
@@ -114,7 +119,7 @@ void effectuerVente(char* login) {
 
         FILE* f = fopen("PRODUCTS.dat", "rb");
         if (!f) {
-            printf("[ERREUR] Impossible de lire le stock.\n");
+            afficherMessage("[ERREUR] Impossible de lire le stock.", "\033[0;31m");
             return;
         }
 
@@ -126,7 +131,9 @@ void effectuerVente(char* login) {
                 time_t maintenant = time(NULL);
                 time_t datePeremption = convertirDate(p.date_peremption);
                 if (difftime(datePeremption, maintenant) <= 0) {
-                    printf("[ERREUR] Le medicament %s est perime.\n", p.designation);
+                    char msg[80];
+                    sprintf(msg, "[ERREUR] Le médicament %s est périmé.", p.designation);
+                    afficherMessage(msg, "\033[0;31m");
                     break;
                 }
 
@@ -138,9 +145,11 @@ void effectuerVente(char* login) {
                     ventes[nb].prixTotal = quantite * p.prix;
                     total += ventes[nb].prixTotal;
                     nb++;
-                    printf("[OK] Medicament ajoute a la commande.\n");
+                    afficherMessage("Medicament ajoute a la commande.", "\033[0;32m");
                 } else {
-                    printf("[ERREUR] Stock insuffisant pour %s.\n", p.designation);
+                    char msg[80];
+                    sprintf(msg, "[ERREUR] Stock insuffisant pour %s.", p.designation);
+                    afficherMessage(msg, "\033[0;31m");
                 }
 
                 break;
@@ -149,7 +158,7 @@ void effectuerVente(char* login) {
 
         fclose(f);
         if (!trouve) {
-            printf("[ERREUR] Medicament introuvable.\n");
+            afficherMessage("[ERREUR] Medicament introuvable.", "\033[0;31m");
         }
     }
 
@@ -160,15 +169,15 @@ void effectuerVente(char* login) {
         if (confirm == 'O' || confirm == 'o') {
             creerFacture(ventes, nb, total, login);
             mettreAJourStock(ventes, nb);
-            printf("[OK] Vente effectuee. Total : %.2f XOF\n", total);
+            printf("\n\033[0;32m[✓] Vente effectuee. Total : %.2f XOF\033[0m\n", total);
         } else {
-            printf("[INFO] Vente annulee.\n");
+            afficherMessage("[INFO] Vente annulee par l'utilisateur.", "\033[0;33m");
         }
     } else {
-        printf("[INFO] Aucune vente enregistree.\n");
+        afficherMessage("[INFO] Aucune vente enregistree.", "\033[0;33m");
     }
-}
 
+}
 int calculerVentesDuJour(const char* date, float* totalVentes, int* nbMedicament) {
     char dossier[] = "BILLS";
     char prefix[20];
@@ -177,6 +186,7 @@ int calculerVentesDuJour(const char* date, float* totalVentes, int* nbMedicament
     *totalVentes = 0;
     *nbMedicament = 0;
 
+    // Ouvre le dossier et lit les fichiers
     DIR* dir = opendir(dossier);
     if (!dir) return 0;
 
@@ -206,16 +216,14 @@ int calculerVentesDuJour(const char* date, float* totalVentes, int* nbMedicament
     closedir(dir);
     return 1;
 }
-
 void verifierStocksCritiques(Produit produits[], int nb, FILE* fRapport) {
     for (int i = 0; i < nb; i++) {
         if (produits[i].quantite < 5) {
-            fprintf(fRapport, "- %s (%s) : %d unites restantes\n",
+            fprintf(fRapport, "- %s (%s) : %d unités restantes\n",
                     produits[i].designation, produits[i].code, produits[i].quantite);
         }
     }
 }
-
 int chargerProduits(Produit produits[], int* nb) {
     FILE* f = fopen("PRODUCTS.dat", "rb");
     if (!f) return 0;
@@ -228,3 +236,4 @@ int chargerProduits(Produit produits[], int* nb) {
     fclose(f);
     return 1;
 }
+

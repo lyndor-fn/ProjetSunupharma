@@ -6,6 +6,9 @@
 #include "menu.h"
 
 #include "utilisateurs.h"
+#include "ventes.h"
+#include "produit.h"
+#include "rapports.h"
 
 
 // Effacer la console
@@ -16,7 +19,10 @@ void clearScreen() {
     system("clear");
 #endif
 }
-
+void pause() {
+    printf("\nAppuyez sur Entrée pour continuer...");
+    getchar(); getchar();
+}
 // === MENU ADMIN ===
 void menuAdmin() {
     int choix;
@@ -56,8 +62,9 @@ void menuPharmacien() {
         scanf("%d", &choix);
 
         switch(choix) {
-            case 1:  menuGestionVentes();  break;
-            case 2:  consulterStock(); break;
+            case 1:  menuGestionVentes(); break;
+
+            //case 2:  void verifierStocksCritiques(Produit p[], int nb_produits, FILE* fRapport); break;
             case 3:  genererRapportJournalier();  break;
             case 0:  clearScreen(); printf("Deconnexion...\n"); break;
             default: printf("Choix invalide !\n");
@@ -108,7 +115,7 @@ int loginUtilisateur() {
     if (strcmp(u.role, "ADMIN") == 0) {
         clearScreen();
         menuAdmin();
-    } else if (strcmp(u.role, "PHARMA") == 0) {
+    } else if (strcmp(u.role, "PHARMACIEN") == 0) {
         clearScreen();
         menuPharmacien();
     } else {

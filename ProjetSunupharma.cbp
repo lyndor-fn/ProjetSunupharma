@@ -31,29 +31,27 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
-		<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="menu.c">
-		<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="menu.h" />
-		<Unit filename="utilisateurs.c">
-		<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="utilisateurs.h" />
-
-		<!-- Fichiers à ajouter -->
 		<Unit filename="categories.c">
-		<Option compilerVar="CC" />
+			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="categories.h" />
-		<Unit filename="produits.c">
-		<Option compilerVar="CC" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="produits.h" />
+		<Unit filename="menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="menu.h" />
+		<Unit filename="produit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="produit.h" />
+		<Unit filename="utilisateurs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="utilisateurs.h" />
 		<Unit filename="ventes.c">
-		<Option compilerVar="CC" />
+			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ventes.h" />
 		<Extensions>

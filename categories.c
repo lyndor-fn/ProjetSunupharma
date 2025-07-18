@@ -3,10 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "categories.h"
+#include "menu.h"
 
 #define FICHIER_CATEGORIE "CATEGORIES.dat"
 
 void menuGestionCategories(){
+    clearScreen();
     int choix;
     do {
         printf("Menu Categories :\n");
@@ -150,4 +152,16 @@ void supprimerCategorie() {
     printf("Exportation termin�e vers 'categories_export.txt'.\n");
 }
 
+}
+int chargerCategories(Categorie categories[], int* nb) {
+    FILE* f = fopen(FICHIER_CATEGORIE, "rb");
+    if (!f) return 0;
+
+    *nb = 0;
+    while (fread(&categories[*nb], sizeof(Categorie), 1, f)) {
+        (*nb)++;
+    }
+
+    fclose(f);
+    return 1;
 }

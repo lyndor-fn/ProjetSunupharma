@@ -4,6 +4,7 @@
 // Nettoie l'�cran
 void clearScreen();
 
+void pause();
 // Menus utilisateurs
 void menuAdmin();
 void menuPharmacien();

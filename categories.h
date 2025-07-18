@@ -12,6 +12,7 @@ void ajouterCategorie();
 void afficherCategories();
 void rechercherCategorie();
 void supprimerCategorie();
+int chargerCategories(Categorie categories[], int* nb);
 
 
 #endif

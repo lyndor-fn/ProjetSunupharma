@@ -26,6 +26,7 @@ void supprimerEtSauvegarderProduit();
 
 // Fonctions de persistance
 void chargerProduitsDepuisFichier();
+void sauvegarderProduitIndividuel(Produit p);
 void sauvegarderProduits();
 
 // Fonctions utilitaires

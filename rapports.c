@@ -2,7 +2,7 @@
 #include <time.h>
 #include <string.h>
 #include "rapports.h"
-#include "produits.h"
+#include "produit.h"
 #include "ventes.h"
 
 void genererRapportJournalier() {
@@ -32,7 +32,7 @@ void genererRapportJournalier() {
 
     if (ventesOK) {
         fprintf(fRapport, "Total des ventes : %.2f XOF\n", totalVentes);
-        fprintf(fRapport, "Nombre total de m�dicaments vendus : %d\n\n", nbMedicament);
+        fprintf(fRapport, "Nombre total de medicaments vendus : %d\n\n", nbMedicament);
 
         // Verifier les stocks critiques
         Produit produits[100];
@@ -44,11 +44,11 @@ void genererRapportJournalier() {
             fprintf(fRapport, "[INFO] Impossible de charger les produits pour les alertes de stock.\n");
         }
     } else {
-        fprintf(fRapport, "[ERREUR] Aucun fichier de vente trouv� pour aujourd�hui.\n");
+        fprintf(fRapport, "[ERREUR] Aucun fichier de vente trouve pour aujourd hui.\n");
     }
 
+    printf("Rapport journalier generer : %s\n", nomFichier);
     fclose(fRapport);
-    printf("Rapport journalier g�n�r� : %s\n", nomFichier);
 }
 
 

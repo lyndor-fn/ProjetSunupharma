@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "produits.h"
+#include "produit.h"
+#include "categories.h"
 
 #define FICHIER_PRODUITS "PRODUCTS.dat"
 
@@ -41,7 +42,29 @@ int verifierCodeUnique(const char* code) {
     return 1;
 }
 
-// ========== PERSISTANCE ==========
+void sauvegarderProduitIndividuel(Produit p) {
+    // Vérifie que le code est unique avant d’ajouter
+    if (!verifierCodeUnique(p.code)) {
+        afficherErreur("Code déjà utilisé. Produit non ajouté.");
+        return;
+    }
+
+    FILE *f = fopen(FICHIER_PRODUITS, "ab");
+    if (!f) {
+        afficherErreur("Erreur ouverture fichier pour ajout.");
+        return;
+    }
+
+    fwrite(&p, sizeof(Produit), 1, f);
+    fclose(f);
+
+    // Met à jour le tableau en mémoire
+    produits[nb_produits++] = p;
+
+    afficherSucces(" Produit ajoute avec succes.");
+}
+
+
 
 void chargerProduitsDepuisFichier() {
     FILE *f = fopen(FICHIER_PRODUITS, "rb");
@@ -62,6 +85,7 @@ void sauvegarderProduits() {
     fwrite(produits, sizeof(Produit), nb_produits, f);
     fclose(f);
 }
+
 
 // ========== GESTION PRODUITS ==========
 
@@ -102,7 +126,37 @@ void ajouterEtSauvegarderProduit() {
     } while (p.quantite < 0);
 
     printf("Categorie : ");
-    scanf(" %[^\n]", p.categorie);
+    Categorie categories[100];
+    int nbCategories;
+
+    if (!chargerCategories(categories, &nbCategories)) {
+        printf("Erreur : impossible de charger les catégories.\n");
+        return;
+    }
+
+    printf("\nListe des catégories disponibles :\n");
+    for (int i = 0; i < nbCategories; i++) {
+        printf("%d. %s\n", categories[i].id, categories[i].libelle);
+    }
+
+    int choixId;
+    int valide = 0;
+    do {
+        printf("Choisissez l'ID de la catégorie : ");
+        scanf("%d", &choixId);
+
+        for (int i = 0; i < nbCategories; i++) {
+            if (categories[i].id == choixId) {
+                strcpy(p.categorie, categories[i].libelle);
+                valide = 1;
+                break;
+            }
+        }
+
+        if (!valide) {
+            printf("ID invalide. Veuillez réessayer.\n");
+        }
+    } while (!valide);
 
     do {
         printf("Date de peremption (YYYY-MM-DD) : ");
@@ -112,9 +166,8 @@ void ajouterEtSauvegarderProduit() {
         } else break;
     } while (1);
 
-    produits[nb_produits++] = p;
-    sauvegarderProduits();
-    afficherSucces("[✓] Produit ajoute avec succes.");
+    sauvegarderProduitIndividuel(p);
+    //afficherSucces("[✓] Produit ajoute avec succes.");
 }
 
 void modifierEtSauvegarderProduit() {
@@ -195,7 +248,7 @@ void afficherProduits() {
 
     printf("%-6s | %-20s | %-8s | %-8s | %-15s | %-12s\n",
            "Code", "Designation", "Prix", "Stock", "Categorie", "Peremption");
-    printf("--------------------------------------------------------------------------\n");
+    printf("---------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < nb_produits; i++) {
         Produit p = produits[i];
@@ -207,6 +260,7 @@ void afficherProduits() {
 // ========== MENU PRINCIPAL ==========
 
 void menuGestionProduits() {
+    chargerProduitsDepuisFichier();
     int choix;
     do {
         printf("\033[1;36m\n=== MENU GESTION DES PRODUITS ===\033[0m\n");

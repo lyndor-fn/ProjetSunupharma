@@ -4,11 +4,11 @@
 #include <dirent.h>
 #include <time.h>
 #include "ventes.h"
-#include "produits.h"
+//#include "produits.h"
 #include "utilisateurs.h"
 
 
-Produit p;
+//Produit p;
 void menuGestionVentes(){
  char login[6];
 

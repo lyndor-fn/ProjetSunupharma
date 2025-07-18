@@ -1,12 +1,15 @@
 # depslib dependency file v1.0
-1752529066 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\main.c
+1752782107 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\main.c
 	<stdio.h>
 	<stdlib.h>
+	"categories.h"
 	"utilisateurs.h"
+	"ventes.h"
+	"rapports.h"
 
-1752527149 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.h
+1752780734 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.h
 
-1752526807 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.c
+1752780647 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -14,12 +17,25 @@
 	"menu.h"
 	"utilisateurs.h"
 
-1752525168 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.h
+1752779142 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.h
 
-1752527426 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.c
+1752779142 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.c
 	<stdio.h>
 	<string.h>
 	<ctype.h>
 	"utilisateurs.h"
 	"menu.h"
+
+1752779142 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\categories.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"categories.h"
+
+1752779142 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\categories.h
+
+1752782146 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\ventes.h
+	<time.h>
+
+1752779159 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\rapports.h
 

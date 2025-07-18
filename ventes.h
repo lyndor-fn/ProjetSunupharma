@@ -2,7 +2,7 @@
 #define VENTES_H
 
 #include <time.h>
-#include "produits.h"
+//#include "produits.h"
 
 typedef struct {
     char code[6];
@@ -20,6 +20,6 @@ void creerFacture(ProduitVendu ventes[], int taille, float total, char* login);
 void mettreAJourStock(ProduitVendu ventes[], int nb);
 void effectuerVente(char* login);
 int calculerVentesDuJour(const char* date, float* totalVentes, int* nbMedicament);
-void verifierStocksCritiques(Produit produits[], int nb, FILE* fRapport);
-int chargerProduits(Produit produits[], int* nb);
+//void verifierStocksCritiques(Produit produits[], int nb, FILE* fRapport);
+//int chargerProduits(Produit produits[], int* nb);
 #endif

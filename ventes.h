@@ -2,7 +2,11 @@
 #define VENTES_H
 
 #include <time.h>
+<<<<<<< HEAD
 #include "produit.h"
+=======
+#include "produits.h"
+>>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
 
 typedef struct {
     char code[6];

@@ -4,7 +4,11 @@
 #include <dirent.h>
 #include <time.h>
 #include "ventes.h"
+<<<<<<< HEAD
 #include "produit.h"
+=======
+#include "produits.h"
+>>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
 #include "utilisateurs.h"
 
 
@@ -66,7 +70,11 @@ fprintf(f, "----------------------------------------\n");
     fclose(f);
 
     char msg[150];
+<<<<<<< HEAD
     sprintf(msg, " Facture enregistrée : %s", nomFichier);
+=======
+    sprintf(msg, "[✓] Facture enregistrée : %s", nomFichier);
+>>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
     afficherMessage(msg, "\033[0;32m");
 }
 
@@ -145,7 +153,11 @@ void effectuerVente(char* login) {
                     ventes[nb].prixTotal = quantite * p.prix;
                     total += ventes[nb].prixTotal;
                     nb++;
+<<<<<<< HEAD
                     afficherMessage("Medicament ajoute a la commande.", "\033[0;32m");
+=======
+                    afficherMessage("[✓] Medicament ajoute a la commande.", "\033[0;32m");
+>>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
                 } else {
                     char msg[80];
                     sprintf(msg, "[ERREUR] Stock insuffisant pour %s.", p.designation);
@@ -176,7 +188,11 @@ void effectuerVente(char* login) {
     } else {
         afficherMessage("[INFO] Aucune vente enregistree.", "\033[0;33m");
     }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
 }
 int calculerVentesDuJour(const char* date, float* totalVentes, int* nbMedicament) {
     char dossier[] = "BILLS";
@@ -236,4 +252,10 @@ int chargerProduits(Produit produits[], int* nb) {
     fclose(f);
     return 1;
 }
+<<<<<<< HEAD
 
+=======
+=======
+}
+>>>>>>> c17f447 (ajout ventes.c et ventes.h)
+>>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34

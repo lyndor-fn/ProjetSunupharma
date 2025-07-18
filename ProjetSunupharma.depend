@@ -1,4 +1,5 @@
 # depslib dependency file v1.0
+<<<<<<< HEAD
 1752841316 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\main.c
 	<stdio.h>
 	<stdlib.h>
@@ -11,12 +12,23 @@
 1752820424 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.h
 
 1752862611 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.c
+=======
+1752529066 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utilisateurs.h"
+
+1752527149 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.h
+
+1752526807 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.c
+>>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"menu.h"
 	"utilisateurs.h"
+<<<<<<< HEAD
 	"ventes.h"
 	"produit.h"
 	"rapports.h"
@@ -24,12 +36,19 @@
 1752845017 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.h
 
 1752820424 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.c
+=======
+
+1752525168 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.h
+
+1752527426 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.c
+>>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
 	<stdio.h>
 	<string.h>
 	<ctype.h>
 	"utilisateurs.h"
 	"menu.h"
 
+<<<<<<< HEAD
 1752842178 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\categories.c
 	<stdio.h>
 	<stdlib.h>
@@ -73,3 +92,5 @@
 	"produit.h"
 	"ventes.h"
 
+=======
+>>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34

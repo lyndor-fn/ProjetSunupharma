@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <time.h>
+#include <string.h>
+#include "rapports.h"
+
+#include "produit.h"
+#include "ventes.h"
+void verifierStocksCritiques(Produit produits[], int nb, FILE* fRapport) {
+    for (int i = 0; i < nb; i++) {
+        if (produits[i].quantite < 5) {
+            fprintf(fRapport, "- %s (%s) : %d unités restantes\n",
+                    produits[i].designation, produits[i].code, produits[i].quantite);
+        }
+    }
+}
+void genererRapportJournalier() {
+    //  Generer date AAAAMMDD
+    char date[9]; // "AAAAMMDD\0"
+    time_t now = time(NULL);
+    struct tm today = *localtime(&now);
+    sprintf(date, "%04d%02d%02d", today.tm_year + 1900, today.tm_mon + 1, today.tm_mday);
+
+    //  Creer le nom du fichier rapport
+    char nomFichier[30];
+    sprintf(nomFichier, "ETAT_%s.txt", date);
+
+    FILE *fRapport = fopen(nomFichier, "w");
+    if (fRapport == NULL) {
+        printf("[ERREUR] Impossible de creer le fichier %s\n", nomFichier);
+        return;
+    }
+
+    //  en-tete
+    fprintf(fRapport, "Rapport du : %04d-%02d-%02d\n", today.tm_year + 1900, today.tm_mon + 1, today.tm_mday);
+
+    // Recuperer ventes du jour
+    float totalVentes = 0;
+    int nbMedicament = 0;
+    int ventesOK = calculerVentesDuJour(date, &totalVentes, &nbMedicament);
+
+    if (ventesOK) {
+        fprintf(fRapport, "Total des ventes : %.2f XOF\n", totalVentes);
+
+        fprintf(fRapport, "Nombre total de medicaments vendus : %d\n\n", nbMedicament);
+
+        // Verifier les stocks critiques
+        Produit produits[100];
+        int nbProduits;
+        if (chargerProduits(produits, &nbProduits)) {
+            fprintf(fRapport, "stock critique :\n");
+            verifierStocksCritiques(produits, nbProduits, fRapport);
+        } else {
+            fprintf(fRapport, "[INFO] Impossible de charger les produits pour les alertes de stock.\n");
+        }
+    } else {
+
+        fprintf(fRapport, "[ERREUR] Aucun fichier de vente trouve pour aujourd hui.\n");
+    }
+
+
+
+    printf("Rapport journalier generer : %s\n", nomFichier);
+    fclose(fRapport);
+
+}
+
+

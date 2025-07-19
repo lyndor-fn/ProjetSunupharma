@@ -5,7 +5,14 @@
 
 #include "produit.h"
 #include "ventes.h"
-
+void verifierStocksCritiques(Produit produits[], int nb, FILE* fRapport) {
+    for (int i = 0; i < nb; i++) {
+        if (produits[i].quantite < 5) {
+            fprintf(fRapport, "- %s (%s) : %d unités restantes\n",
+                    produits[i].designation, produits[i].code, produits[i].quantite);
+        }
+    }
+}
 void genererRapportJournalier() {
     //  Generer date AAAAMMDD
     char date[9]; // "AAAAMMDD\0"

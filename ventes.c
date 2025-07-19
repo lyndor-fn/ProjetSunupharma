@@ -175,6 +175,7 @@ void effectuerVente(char* login) {
             creerFacture(ventes, nb, total, login);
             mettreAJourStock(ventes, nb);
             printf("\n\033[0;32m[✓] Vente effectuee. Total : %.2f XOF\033[0m\n", total);
+         verifierStocksCritiques(Produit produits[], int nb, FILE* fRapport) 
         } else {
             afficherMessage("[INFO] Vente annulee par l'utilisateur.", "\033[0;33m");
         }
@@ -221,14 +222,7 @@ int calculerVentesDuJour(const char* date, float* totalVentes, int* nbMedicament
     closedir(dir);
     return 1;
 }
-void verifierStocksCritiques(Produit produits[], int nb, FILE* fRapport) {
-    for (int i = 0; i < nb; i++) {
-        if (produits[i].quantite < 5) {
-            fprintf(fRapport, "- %s (%s) : %d unités restantes\n",
-                    produits[i].designation, produits[i].code, produits[i].quantite);
-        }
-    }
-}
+
 int chargerProduits(Produit produits[], int* nb) {
     FILE* f = fopen("PRODUCTS.dat", "rb");
     if (!f) return 0;

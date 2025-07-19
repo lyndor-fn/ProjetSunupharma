@@ -6,12 +6,11 @@
 #include "menu.h"
 
 #include "utilisateurs.h"
-<<<<<<< HEAD
+
 #include "ventes.h"
 #include "produit.h"
 #include "rapports.h"
-=======
->>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
+
 
 
 // Effacer la console
@@ -22,14 +21,7 @@ void clearScreen() {
     system("clear");
 #endif
 }
-<<<<<<< HEAD
-void pause() {
-    printf("\nAppuyez sur Entrée pour continuer...");
-    getchar(); getchar();
-}
-=======
 
->>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
 // === MENU ADMIN ===
 void menuAdmin() {
     int choix;
@@ -45,13 +37,9 @@ void menuAdmin() {
         scanf("%d", &choix);
 
         switch(choix) {
-<<<<<<< HEAD
+
             case 1: clearScreen(); menuGestionCategories(); break;
             case 2: clearScreen(); menuGestionProduits(); break;
-=======
-          // case 1: clearScreen(); menuGestionCategories(); break;
-            //case 2: clearScreen(); menuGestionProduits(); break;
->>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
             case 3: clearScreen(); ajouterUtilisateur(); break;
             case 4: clearScreen(); afficherUtilisateurs(); break;
             case 5: clearScreen(); changerStatutUtilisateur(); break;
@@ -65,26 +53,19 @@ void menuAdmin() {
 void menuPharmacien() {
     int choix;
     do {
-        printf("\033[1;35m\n=== MENU PHARMACIEN ===\n\033[0m");
+        printf("\n=== MENU PHARMACIEN ===\n");
         printf("1. Vendre un produit \n");
         printf("2. Consulter le stock \n");
         printf("3. Imprimer rapport journalier\n");
-        printf("0. Deconnexion\n");
+        printf("0. Déconnexion\n");
         printf("Votre choix : ");
         scanf("%d", &choix);
 
         switch(choix) {
-<<<<<<< HEAD
-            case 1:  menuGestionVentes(); break;
-
-            //case 2:  void verifierStocksCritiques(Produit p[], int nb_produits, FILE* fRapport); break;
-            case 3:  genererRapportJournalier();  break;
-=======
-          //  case 1:  menuGestionVentes();  break;
-          //  case 2:  consulterStock(); break;
-            //case 3:  genererRapportJournalier();  break;
->>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
-            case 0:  clearScreen(); printf("Deconnexion...\n"); break;
+            case 1:clearScreen(); menuGestionVentes(); break;
+            case 2: clearScreen();consulterStock(produits, nbProduits); break;
+            case 3:clearScreen(); genererRapportJournalier(produits, nbProduits, totalVentes, totalArticles); break;
+            case 0: clearScreen(); printf("Déconnexion...\n"); break;
             default: printf("Choix invalide !\n");
         }
     } while(choix != 0);
@@ -97,7 +78,7 @@ int loginUtilisateur() {
 
     FILE *f = fopen("users.dat", "rb");
     if (!f) {
-        printf("\033[31mAucun utilisateur trouv� ! Veuillez en cr�er un.\033[0m\n");
+        printf("\033[31mAucun utilisateur trouve ! Veuillez en creer un.\033[0m\n");
         return 0;
     }
 
@@ -133,11 +114,9 @@ int loginUtilisateur() {
     if (strcmp(u.role, "ADMIN") == 0) {
         clearScreen();
         menuAdmin();
-<<<<<<< HEAD
+
     } else if (strcmp(u.role, "PHARMACIEN") == 0) {
-=======
-    } else if (strcmp(u.role, "PHARMA") == 0) {
->>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
+
         clearScreen();
         menuPharmacien();
     } else {

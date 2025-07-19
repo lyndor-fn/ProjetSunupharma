@@ -2,11 +2,8 @@
 #include <time.h>
 #include <string.h>
 #include "rapports.h"
-<<<<<<< HEAD
+
 #include "produit.h"
-=======
-#include "produits.h"
->>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
 #include "ventes.h"
 
 void genererRapportJournalier() {
@@ -36,11 +33,8 @@ void genererRapportJournalier() {
 
     if (ventesOK) {
         fprintf(fRapport, "Total des ventes : %.2f XOF\n", totalVentes);
-<<<<<<< HEAD
+
         fprintf(fRapport, "Nombre total de medicaments vendus : %d\n\n", nbMedicament);
-=======
-        fprintf(fRapport, "Nombre total de m�dicaments vendus : %d\n\n", nbMedicament);
->>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
 
         // Verifier les stocks critiques
         Produit produits[100];
@@ -52,19 +46,15 @@ void genererRapportJournalier() {
             fprintf(fRapport, "[INFO] Impossible de charger les produits pour les alertes de stock.\n");
         }
     } else {
-<<<<<<< HEAD
+
         fprintf(fRapport, "[ERREUR] Aucun fichier de vente trouve pour aujourd hui.\n");
     }
 
+
+
     printf("Rapport journalier generer : %s\n", nomFichier);
     fclose(fRapport);
-=======
-        fprintf(fRapport, "[ERREUR] Aucun fichier de vente trouv� pour aujourd�hui.\n");
-    }
 
-    fclose(fRapport);
-    printf("Rapport journalier g�n�r� : %s\n", nomFichier);
->>>>>>> 844778b0052d396ad8e8cec2386a55730f395a34
 }
 
 

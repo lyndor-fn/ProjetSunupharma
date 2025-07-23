@@ -4,19 +4,38 @@
 #include <dirent.h>
 #include <time.h>
 #include "ventes.h"
-#include "produits.h"
+
+#include "produit.h"
+
 #include "utilisateurs.h"
 
 
 Produit p;
 void menuGestionVentes(){
- char login[6];
+    int choix;
+    do {
+        printf("\033[1;36m\n=== MENU VENTE ===\n\033[0m");
+        printf("1. EFFECTUER UNE VENTE\n");
+        printf("2. RETOUR\n");
+        printf("Votre choix : ");
+        scanf("%d", &choix);
 
-    printf("===== MODULE DE TEST : GESTION DES VENTES =====\n");
-    printf("Entrez le login du pharmacien (5 lettres majuscules) : ");
-    scanf("%s", login);
+        switch(choix) {
 
-    effectuerVente(login);
+            case 1: clearScreen();
+            char login[6];
+
+            printf("===== MODULE DE TEST : GESTION DES VENTES =====\n");
+            printf("Entrez le login du pharmacien (5 lettres majuscules) : ");
+            scanf("%s", login);
+
+            effectuerVente(login);
+            break;
+            case 2: clearScreen(); menuPharmacien(); break;
+            default: printf("Choix invalide !\n");
+        }
+    } while(choix != 0);
+
 }
 // Génération du numéro de vente : AAAAMMDDHHmmSS
 void genererNumeroVente(char* numero) {
@@ -41,7 +60,7 @@ void creerFacture(ProduitVendu ventes[], int taille, float total, char* login) {
 
     FILE* f = fopen(nomFichier, "w");
     if (!f) {
-        afficherMessage("[ERREUR] Impossible de créer la facture.", "\033[0;31m");
+        afficherMessage("[ERREUR] Impossible de creer la facture.", "\033[0;31m");
         return;
     }
 
@@ -66,7 +85,8 @@ fprintf(f, "----------------------------------------\n");
     fclose(f);
 
     char msg[150];
-    sprintf(msg, "[✓] Facture enregistrée : %s", nomFichier);
+    sprintf(msg, " Facture enregistree : %s", nomFichier);
+
     afficherMessage(msg, "\033[0;32m");
 }
 
@@ -132,7 +152,7 @@ void effectuerVente(char* login) {
                 time_t datePeremption = convertirDate(p.date_peremption);
                 if (difftime(datePeremption, maintenant) <= 0) {
                     char msg[80];
-                    sprintf(msg, "[ERREUR] Le médicament %s est périmé.", p.designation);
+                    sprintf(msg, "[ERREUR] Le medicament %s est perime.", p.designation);
                     afficherMessage(msg, "\033[0;31m");
                     break;
                 }
@@ -145,7 +165,9 @@ void effectuerVente(char* login) {
                     ventes[nb].prixTotal = quantite * p.prix;
                     total += ventes[nb].prixTotal;
                     nb++;
-                    afficherMessage("[✓] Medicament ajoute a la commande.", "\033[0;32m");
+
+                    afficherMessage("Medicament ajoute a la commande.", "\033[0;32m");
+
                 } else {
                     char msg[80];
                     sprintf(msg, "[ERREUR] Stock insuffisant pour %s.", p.designation);
@@ -169,14 +191,15 @@ void effectuerVente(char* login) {
         if (confirm == 'O' || confirm == 'o') {
             creerFacture(ventes, nb, total, login);
             mettreAJourStock(ventes, nb);
-            printf("\n\033[0;32m[✓] Vente effectuee. Total : %.2f XOF\033[0m\n", total);
+            printf("\n\033[0;32m[OK] Vente effectuee. Total : %.2f XOF\033[0m\n", total);
+         //verifierStocksCritiques(Produit produits[], int nb, FILE* fRapport)
         } else {
             afficherMessage("[INFO] Vente annulee par l'utilisateur.", "\033[0;33m");
         }
     } else {
         afficherMessage("[INFO] Aucune vente enregistree.", "\033[0;33m");
     }
-<<<<<<< HEAD
+
 }
 int calculerVentesDuJour(const char* date, float* totalVentes, int* nbMedicament) {
     char dossier[] = "BILLS";
@@ -216,26 +239,5 @@ int calculerVentesDuJour(const char* date, float* totalVentes, int* nbMedicament
     closedir(dir);
     return 1;
 }
-void verifierStocksCritiques(Produit produits[], int nb, FILE* fRapport) {
-    for (int i = 0; i < nb; i++) {
-        if (produits[i].quantite < 5) {
-            fprintf(fRapport, "- %s (%s) : %d unités restantes\n",
-                    produits[i].designation, produits[i].code, produits[i].quantite);
-        }
-    }
-}
-int chargerProduits(Produit produits[], int* nb) {
-    FILE* f = fopen("PRODUCTS.dat", "rb");
-    if (!f) return 0;
 
-    *nb = 0;
-    while (fread(&produits[*nb], sizeof(Produit), 1, f)) {
-        (*nb)++;
-    }
 
-    fclose(f);
-    return 1;
-}
-=======
-}
->>>>>>> c17f447 (ajout ventes.c et ventes.h)

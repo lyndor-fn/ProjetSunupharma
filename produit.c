@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "produits.h"
+#include "produit.h"
+#include "categories.h"
 
 #define FICHIER_PRODUITS "PRODUCTS.dat"
 
+// ======== GLOBAL =========
 Produit produits[MAX_PRODUCTS];
 int nb_produits = 0;
 
@@ -41,17 +43,20 @@ int verifierCodeUnique(const char* code) {
     return 1;
 }
 
-// ========== PERSISTANCE ==========
+void consulterStock(Produit produits[], int nbProduits) {
+    chargerProduitsDepuisFichier();
+              //  printf("DEBUG : %d produits chargés\n", nbProduits);
 
-void chargerProduitsDepuisFichier() {
-    FILE *f = fopen(FICHIER_PRODUITS, "rb");
-    if (!f) {
-        nb_produits = 0;
-        return;
+    printf("\n======= STOCK ACTUEL =======\n");
+    for (int i = 0; i < nb_produits; i++) {
+        if (strlen(produits[i].code) == 0) continue;  // ignorer les lignes vides
+        printf("%s - %s : %d unités | Prix : %.2f FCFA\n",
+               produits[i].code, produits[i].designation,
+               produits[i].quantite, produits[i].prix);
     }
-    nb_produits = fread(produits, sizeof(Produit), MAX_PRODUCTS, f);
-    fclose(f);
+    printf("=============================\n");
 }
+
 
 void sauvegarderProduits() {
     FILE *f = fopen(FICHIER_PRODUITS, "wb");
@@ -62,6 +67,21 @@ void sauvegarderProduits() {
     fwrite(produits, sizeof(Produit), nb_produits, f);
     fclose(f);
 }
+
+void chargerProduitsDepuisFichier() {
+    FILE *f = fopen(FICHIER_PRODUITS, "rb");
+    if (!f) {
+        nb_produits = 0;
+        return;
+    }
+
+    nb_produits = 0;
+    while (fread(&produits[nb_produits], sizeof(Produit), 1, f)) {
+        nb_produits++;
+    }
+    fclose(f);
+}
+
 
 // ========== GESTION PRODUITS ==========
 
@@ -102,7 +122,37 @@ void ajouterEtSauvegarderProduit() {
     } while (p.quantite < 0);
 
     printf("Categorie : ");
-    scanf(" %[^\n]", p.categorie);
+    Categorie categories[100];
+    int nbCategories;
+
+    if (!chargerCategories(categories, &nbCategories)) {
+        printf("Erreur : impossible de charger les categories.\n");
+        return;
+    }
+
+    printf("\nListe des categories disponibles :\n");
+    for (int i = 0; i < nbCategories; i++) {
+        printf("%d. %s\n", categories[i].id, categories[i].libelle);
+    }
+
+    int choixId;
+    int valide = 0;
+    do {
+        printf("Choisissez l'ID de la categorie : ");
+        scanf("%d", &choixId);
+
+        for (int i = 0; i < nbCategories; i++) {
+            if (categories[i].id == choixId) {
+                strcpy(p.categorie, categories[i].libelle);
+                valide = 1;
+                break;
+            }
+        }
+
+        if (!valide) {
+            printf("ID invalide. Veuillez reessayer.\n");
+        }
+    } while (!valide);
 
     do {
         printf("Date de peremption (YYYY-MM-DD) : ");
@@ -114,7 +164,7 @@ void ajouterEtSauvegarderProduit() {
 
     produits[nb_produits++] = p;
     sauvegarderProduits();
-    afficherSucces("[✓] Produit ajoute avec succes.");
+    afficherSucces("[ok] Produit ajoute avec succes.");
 }
 
 void modifierEtSauvegarderProduit() {
@@ -156,7 +206,7 @@ void modifierEtSauvegarderProduit() {
             } while (1);
 
             sauvegarderProduits();
-            afficherSucces("[✓] Produit modifie avec succes.");
+            afficherSucces("[ok] Produit modifie avec succes.");
             return;
         }
     }
@@ -177,7 +227,7 @@ void supprimerEtSauvegarderProduit() {
             }
             nb_produits--;
             sauvegarderProduits();
-            afficherSucces("[✓] Produit supprime avec succes.");
+            afficherSucces("[ok] Produit supprime avec succes.");
             return;
         }
     }
@@ -189,24 +239,39 @@ void afficherProduits() {
     printf("\n=== LISTE DES PRODUITS ===\n");
 
     if (nb_produits == 0) {
-        printf("Aucun produit trouve.\n");
+        printf("Aucun produit trouvé.\n");
         return;
     }
 
     printf("%-6s | %-20s | %-8s | %-8s | %-15s | %-12s\n",
-           "Code", "Designation", "Prix", "Stock", "Categorie", "Peremption");
-    printf("--------------------------------------------------------------------------\n");
+           "Code", "Désignation", "Prix", "Stock", "Catégorie", "Péremption");
+    printf("---------------------------------------------------------------------------------------\n");
+
+    int produitsVisibles = 0;
 
     for (int i = 0; i < nb_produits; i++) {
         Produit p = produits[i];
+
+        // Ignorer les entrées avec code ou désignation vide
+        if (strlen(p.code) == 0 || strlen(p.designation) == 0)
+            continue;
+
         printf("%-6s | %-20s | %-8.2f | %-8d | %-15s | %-12s\n",
                p.code, p.designation, p.prix, p.quantite, p.categorie, p.date_peremption);
+
+        produitsVisibles++;
+    }
+
+    if (produitsVisibles == 0) {
+        printf("Aucun produit valide a afficher.\n");
     }
 }
+
 
 // ========== MENU PRINCIPAL ==========
 
 void menuGestionProduits() {
+    chargerProduitsDepuisFichier();
     int choix;
     do {
         printf("\033[1;36m\n=== MENU GESTION DES PRODUITS ===\033[0m\n");
@@ -219,19 +284,19 @@ void menuGestionProduits() {
         scanf("%d", &choix);
 
         switch (choix) {
-            case 1:
+            case 1:clearScreen();
                 ajouterEtSauvegarderProduit();
                 break;
-            case 2:
+            case 2:clearScreen();
                 modifierEtSauvegarderProduit();
                 break;
-            case 3:
+            case 3:clearScreen();
                 supprimerEtSauvegarderProduit();
                 break;
-            case 4:
+            case 4:clearScreen();
                 afficherProduits();
                 break;
-            case 0:
+            case 0:clearScreen();
                 printf("Retour...\n");
                 break;
             default:
@@ -239,3 +304,4 @@ void menuGestionProduits() {
         }
     } while (choix != 0);
 }
+

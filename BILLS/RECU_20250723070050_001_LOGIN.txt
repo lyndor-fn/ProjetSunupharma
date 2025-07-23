@@ -1,0 +1,16 @@
+========================================
+              FACTURE DE VENTE          
+========================================
+Numéro de vente : 20250723070050
+Pharmacien : LOGIN
+
+Code   Produit                   Qté  PU (XOF)   Total     
+---------------------------------------------------------------
+PARA1  PARA                      10    123.00     1230.00   
+
+TOTAL À PAYER : 1230.00 XOF
+
+----------------------------------------
+  Merci pour votre confiance chez Sunupharma 
+  À bientôt pour vos prochains besoins de santé !
+----------------------------------------

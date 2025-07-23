@@ -1,0 +1,16 @@
+========================================
+              FACTURE DE VENTE          
+========================================
+Numéro de vente : 20250721161237
+Pharmacien : PHARM
+
+Code   Produit                   Qté  PU (XOF)   Total     
+---------------------------------------------------------------
+PARA1  500mg                     10    400.00     4000.00   
+
+TOTAL À PAYER : 4000.00 XOF
+
+----------------------------------------
+  Merci pour votre confiance chez Sunupharma 
+  À bientôt pour vos prochains besoins de santé !
+----------------------------------------

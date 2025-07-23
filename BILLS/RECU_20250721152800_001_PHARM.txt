@@ -1,0 +1,17 @@
+========================================
+              FACTURE DE VENTE          
+========================================
+Numéro de vente : 20250721152800
+Pharmacien : PHARM
+
+Code   Produit                   Qté  PU (XOF)   Total     
+---------------------------------------------------------------
+PARA1  Tab500mg                  10    300.00     3000.00   
+PARA2  800mg                     14    459.00     6426.00   
+
+TOTAL À PAYER : 9426.00 XOF
+
+----------------------------------------
+  Merci pour votre confiance chez Sunupharma 
+  À bientôt pour vos prochains besoins de santé !
+----------------------------------------

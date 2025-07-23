@@ -1,0 +1,248 @@
+# depslib dependency file v1.0
+140714724611690 <<<<<<< HEAD
+
+1752529066 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\main.c
+	<stdio.h>
+	<stdlib.h>
+	"produit.h"
+	"categories.h"
+	"utilisateurs.h"
+	"ventes.h"
+	"rapports.h"
+	<stdio.h>
+	<stdlib.h>
+	"utilisateurs.h"
+
+1752527149 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.h
+
+1752526807 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.c
+
+1752846551 778b0052d396ad8e8cec2386a55730f395a34
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"menu.h"
+	"utilisateurs.h"
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"utilisateurs.h"
+	"menu.h"
+
+1752527426 D
+	"ventes.h"
+	"produit.h"
+	"rapports.h"
+
+1752525168 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\menu.h
+
+1752527426 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\utilisateurs.c
+
+1752842178 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\categories.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"categories.h"
+	"menu.h"
+
+1752841689 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\categories.h
+
+1752822935 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\ventes.h
+	<time.h>
+	"produit.h"
+
+1752820424 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\rapports.h
+
+1752861645 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\produit.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"produit.h"
+	"categories.h"
+
+1752843112 c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\produit.h
+
+1752862497 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\ventes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	<time.h>
+	"ventes.h"
+	"produit.h"
+	"utilisateurs.h"
+
+1752846551 source:c:\users\bousso\desktop\codeblocks c\sousprogramme\projetsunupharma\rapports.c
+	<stdio.h>
+	<time.h>
+	<string.h>
+	"rapports.h"
+	"produit.h"
+	"ventes.h"
+
+1752846551 
+
+1752937944 source:c:\users\bousso\downloads\projetsunupharma-integration\categories.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"categories.h"
+	"menu.h"
+
+1752937944 c:\users\bousso\downloads\projetsunupharma-integration\categories.h
+
+1752937944 c:\users\bousso\downloads\projetsunupharma-integration\menu.h
+
+1752938829 source:c:\users\bousso\downloads\projetsunupharma-integration\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"menu.h"
+	"utilisateurs.h"
+	"ventes.h"
+	"produit.h"
+	"rapports.h"
+
+1752937945 c:\users\bousso\downloads\projetsunupharma-integration\utilisateurs.h
+
+1752938077 c:\users\bousso\downloads\projetsunupharma-integration\ventes.h
+	<time.h>
+	"produit.h"
+
+1752938521 c:\users\bousso\downloads\projetsunupharma-integration\produit.h
+
+1752937945 c:\users\bousso\downloads\projetsunupharma-integration\rapports.h
+
+1752938498 source:c:\users\bousso\downloads\projetsunupharma-integration\produit.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"produit.h"
+	"categories.h"
+
+1752937945 source:c:\users\bousso\downloads\projetsunupharma-integration\utilisateurs.c
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"utilisateurs.h"
+	"menu.h"
+
+1752938085 source:c:\users\bousso\downloads\projetsunupharma-integration\ventes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	<time.h>
+	"ventes.h"
+	"produit.h"
+	"utilisateurs.h"
+
+1752938044 source:c:\users\bousso\downloads\projetsunupharma-integration\main.c
+	<stdio.h>
+	<stdlib.h>
+	"produit.h"
+	"categories.h"
+	"utilisateurs.h"
+	"ventes.h"
+	"rapports.h"
+
+1752937945 source:c:\users\bousso\downloads\projetsunupharma-integration\rapports.c
+	<stdio.h>
+	<time.h>
+	<string.h>
+	"rapports.h"
+	"produit.h"
+	"ventes.h"
+
+1753255639 source:c:\users\bousso\downloads\se\projetsunupharma-master\categories.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"categories.h"
+	"menu.h"
+
+1753106983 c:\users\bousso\downloads\se\projetsunupharma-master\categories.h
+
+1753106983 c:\users\bousso\downloads\se\projetsunupharma-master\menu.h
+
+1753251160 source:c:\users\bousso\downloads\se\projetsunupharma-master\main.c
+	<stdio.h>
+	<stdlib.h>
+	"produit.h"
+	"categories.h"
+	"utilisateurs.h"
+	"ventes.h"
+	"menu.h"
+
+1753253960 c:\users\bousso\downloads\se\projetsunupharma-master\produit.h
+
+1753255639 c:\users\bousso\downloads\se\projetsunupharma-master\utilisateurs.h
+
+1753251584 c:\users\bousso\downloads\se\projetsunupharma-master\ventes.h
+	<time.h>
+	<stdio.h>
+	"produit.h"
+
+1753111572 c:\users\bousso\downloads\se\projetsunupharma-master\rapports.h
+	"produit.h"
+
+1753254812 source:c:\users\bousso\downloads\se\projetsunupharma-master\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"menu.h"
+	"utilisateurs.h"
+	"ventes.h"
+	"produit.h"
+	"rapports.h"
+
+1753255639 source:c:\users\bousso\downloads\se\projetsunupharma-master\produit.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"produit.h"
+	"categories.h"
+
+1753106983 source:c:\users\bousso\downloads\se\projetsunupharma-master\utilisateurs.c
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	"utilisateurs.h"
+	"menu.h"
+
+1753255639 source:c:\users\bousso\downloads\se\projetsunupharma-master\ventes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<dirent.h>
+	<time.h>
+	"ventes.h"
+	"produit.h"
+	"utilisateurs.h"
+
+1753255639 source:c:\users\bousso\downloads\se\projetsunupharma-master\rapports.c
+	<stdio.h>
+	<time.h>
+	<string.h>
+	"rapports.h"
+	"produit.h"
+	"ventes.h"
+	"utilisateurs.h"
+
+1753112345 c:\users\bousso\downloads\se\projetsunupharma-master\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"menu.h"
+	"utilisateurs.h"
+	"ventes.h"
+	"produit.h"
+	"rapports.h"
+

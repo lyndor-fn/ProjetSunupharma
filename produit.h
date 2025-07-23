@@ -1,5 +1,5 @@
-#ifndef PRODUITS_H
-#define PRODUITS_H
+#ifndef PRODUIT_H
+#define PRODUIT_H
 
 #define MAX_PRODUCTS 100
 #define CODE_LENGTH 6
@@ -15,6 +15,10 @@ typedef struct {
     char date_peremption[11];
 } Produit;
 
+// Déclaration globale (facultative si on utilise passage par paramètre)
+extern Produit produits[MAX_PRODUCTS];
+extern int nb_produits;
+
 // Fonctions principales
 void menuGestionProduits();
 void afficherProduits();
@@ -25,7 +29,7 @@ void modifierEtSauvegarderProduit();
 void supprimerEtSauvegarderProduit();
 
 // Fonctions de persistance
-void chargerProduitsDepuisFichier();
+int chargerProduits(Produit produits[], int* nb);  // <-- nouvelle fonction cohérente
 void sauvegarderProduits();
 
 // Fonctions utilitaires
